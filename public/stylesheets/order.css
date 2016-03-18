@@ -1,0 +1,81 @@
+.product-menu-wrap{
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 0;
+}
+.product-menu-wrap .product-menu-show,
+.product-menu-wrap .product-menu-add{
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	background-color: #26a9e1;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 16px;
+	display: inline-block;
+	cursor: pointer;
+}
+.
+.product-content-wrap .product-list{
+	width: 900px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.product-content-wrap .product-list .product-item{
+	width: 150px;
+	height: 200px;
+	float: left;
+	margin-right: 20px;
+}
+.product-content-wrap .product-list .product-img{
+	width: 150px;
+	height: 150px;
+	border: 1px solid #ccc;
+	margin-right: 10px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+}
+.product-content-wrap .product-list .product-name{
+	text-align: center;
+	width: 100%;
+	line-height: 16px;
+	font-size: 13px;
+	color: #666;
+}
+.product-add-wrap{
+	text-align: left;
+	width: 400px;
+	margin: 0 auto;
+	font-size: 17px;
+}
+.product-add-wrap label{
+	color: #26a9e1;
+}
+.product-add-wrap input{
+	position: relative;
+    height: 30px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border: 1px solid #dde1eb;
+}
+.product-add-wrap textarea{
+	border: 1px solid #dde1eb;
+}
+.product-add-wrap button{
+	width: 100%;
+	height: 50px;
+	color: #fff;
+	background-color: #26a9e1;
+	line-height: 50px;
+	text-align: center;
+	border: none;
+	border-radius: 5px;
+}
+table{
+	text-align: center;
+}
+
+

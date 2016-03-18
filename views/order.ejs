@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>管理系统</title>
+        <link rel='stylesheet' href='/css/order.min.css' />
+    </head>
+    <body>
+        <% include header.ejs %>
+        <div class="product-content-wrap">
+            <div class="product-menu-wrap">
+            	<div class="product-menu-show">查看子订单</div>
+            	<div class="product-menu-add">添加子订单</div>
+            </div>
+            <table class="product-list" border="1" cellpadding="10" align="center">
+                <tr>
+                    <th>姓名</th>
+                    <th>电话</th>
+                    <th>地址</th>
+                    <th>是否付款</th>
+                    <th>国内运费</th>
+                    <th>商品名</th>
+                    <th>数量</th>
+                    <th>订单状态</th>
+                    <th>快递公司</th>
+                    <th>快递单号</th>
+                    <th>是否采购</th>
+                    <th>订单号</th>
+                </tr>
+                <%for(var i = 0; i < orderData.length; i++){%>
+                <tr >
+                    <td><%= orderData[i].name%></td>
+                    <td><%= orderData[i].tel%></td>
+                    <td><%= orderData[i].address%></td>
+                    <td><%= orderData[i].has_pay>0?'已付款':'未付款'%></td>
+                    <td><%= orderData[i].freight%></td>
+                    <td><%= orderData[i].product%></td>
+                    <td><%= orderData[i].count%></td>
+                    <td><%= orderData[i].order_status==0?'未发货': (orderData[i].order_status==1?'已发货':'已完成')%></td>
+                    <td><%= orderData[i].express_company%></td>
+                    <td><%= orderData[i].express_num%></td>
+                    <td><%= orderData[i].has_join>0?'已采购':'未采购'%></td>
+                    <td><%= orderData[i]._id%></td>
+                </tr>
+                <%}%>
+            </table>
+            <div class="product-add-wrap hide">
+            	<form action="/order/add" method="post">
+            		<label>选择用户:</label>
+            		<select name="user_id">
+                          <%for(var j = 0; j < userArr.length; j++){%>
+                            <option value="<%= userArr[j]._id%>"><%= userArr[j].name%></option>
+                          <%}%>
+                    </select>
+            		<br>
+            		<label>选择商品:</label>
+            		<select name="product_id">
+                          <%for(var k = 0; k < productArr.length; k++){%>
+                            <option value="<%= productArr[k]._id%>"><%= productArr[k].name%></option>
+                          <%}%>
+                    </select>
+            		<br>
+                    <label>选择数量:</label>
+                    <input type="text" required name="count"/>
+                    <br>
+            		<label>是否付款:</label>
+            		<input type="radio" name="has_pay" value="1" /> 已付款
+                    <input type="radio" name="has_pay" checked value="0" /> 未付款
+            		<br>
+                    <label>国内运费:</label>
+                    <input type="text" required name="freight"/>
+                    <br>
+                    <label>订单状态:</label>
+                    <input type="radio" name="order_status" checked value="0" /> 未发货
+                    <input type="radio" name="order_status" value="1" /> 已发货
+                    <input type="radio" name="order_status" value="2" /> 已完成
+                    <br>
+                    <label>快递公司:</label>
+                    <input type="text" required name="express_company"/>
+                    <br>
+                    <label>快递单号:</label>
+                    <input type="text" required name="express_num"/>
+                    <br>
+                    <label>是否加入大订单:</label>
+                    <input type="radio" name="has_join" checked value="0" /> 未加入
+                    <input type="radio" name="has_join" value="1" /> 已加入
+                    <br>
+            		<button type="submit">提交</button>
+            	</form>
+            </div>
+        </div>
+        <script type="text/javascript" src="/javascripts/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript">
+        	$('.product-menu-show').click(function(){
+        		$('.product-list').show();
+        		$('.product-add-wrap').hide();
+        	});
+        	$('.product-menu-add').click(function(){
+        		$('.product-list').hide();
+        		$('.product-add-wrap').show();
+        	});
+        </script>
+    </body>
+</html>

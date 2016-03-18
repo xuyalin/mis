@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>管理系统</title>
+        <link rel='stylesheet' href='/css/product.min.css' />
+    </head>
+    <body>
+        <% include header.ejs %>
+        <div class="product-content-wrap">
+            <div class="product-menu-wrap">
+            	<div class="product-menu-show">查看商品</div>
+            	<div class="product-menu-add">添加商品</div>
+            </div>
+            <ul class="product-list">
+            	<%for(var i = 0; i < productData.length; i++){%>
+            	<li class="product-item">
+                    <a href="/product/detail?id=<%= productData[i]._id%>">
+            		<div class="product-img" style="background-image: url(<%= productData[i].images[0]%>)"></div>
+            		<p class="product-name"><%= productData[i].name%></p>
+                    </a>
+            	</li>
+            	<%}%>
+            </ul>
+            <div class="product-add-wrap hide">
+            	<form action="/product/upload" method="post" enctype='multipart/form-data'>
+            		<label>商品名称:</label>
+            		<input type="text" required name="name"/>
+            		<br>
+            		<label>商品图片：</label>
+            		<input type="file" required name="images" multiple />
+            		<br>
+            		<label>商品描述</label>
+            		<textarea name="desc"></textarea>
+            		<br>
+            		<label>商品进价：</label>
+            		<input type="text" required name="in_price" />
+            		<br>
+            		<label>商品卖价：</label>
+            		<input type="text" required name="sell_price"/>
+            		<br>
+            		<label>商品重量：</label>
+            		<input type="text" required name="weight"/>
+            		<br>
+            		<label>商品运费：</label>
+            		<input type="text" required name="freight"/>
+            		<br>
+            		<label>商品库存：</label>
+            		<input type="text" required name="store"/>
+            		<br>
+            		<label>竞品价格：</label>
+            		<input type="text" required name="other_price"/>
+            		<br>
+            		<button type="submit">提交</button>
+            	</form>
+            </div>
+        </div>
+        <script type="text/javascript" src="/javascripts/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript">
+        	$('.product-menu-show').click(function(){
+        		$('.product-list').show();
+        		$('.product-add-wrap').hide();
+        	});
+        	$('.product-menu-add').click(function(){
+        		$('.product-list').hide();
+        		$('.product-add-wrap').show();
+        	});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>管理系统</title>
+        <link rel='stylesheet' href='/css/order.min.css' />
+    </head>
+    <body>
+        <% include header.ejs %>
+        <div class="product-content-wrap">
+            <div class="product-menu-wrap">
+            	<div class="product-menu-show">查看订单</div>
+            	<div class="product-menu-add">添加订单</div>
+            </div>
+            <table class="product-list" border="1" cellpadding="10" align="center">
+                <tr>
+                    <th>订单号</th>
+                    <th>下单时间</th>
+                    <th>子订单</th>
+                    <th>订单运费</th>
+                    <th>订单状态</th>
+                    <th>订单代购费</th>
+                </tr>
+                <%for(var i = 0; i < orderData.length; i++){%>
+                <tr >
+                    <td><%= orderData[i]._id%></td>
+                    <td><%= new Date(parseInt(orderData[i].order_time)).toLocaleDateString()%></td>
+                    <td><%= orderData[i].sub_orders%></td>
+                    <td><%= orderData[i].freight%></td>
+                    <td><%= orderData[i].order_status==0?'收集中': (orderData[i].order_status==1?'已下单':'已完成')%></td>
+                    <td><%= orderData[i].behalf%></td>
+                </tr>
+                <%}%>
+            </table>
+            <div class="product-add-wrap hide">
+            	<form action="/bigorder/add" method="post">
+                    <label>订单时间:</label>
+                    <input type="text" required name="order_time" value="<%= +new Date()%>"/>
+                    <br>
+            		<label>添加订单:</label><br>
+                    <%for(var j = 0; j < sub_order.length; j++){ if(sub_order[j].has_join == 0){%>
+                        <input type="checkbox" name="sub_orders" value="<%= sub_order[j]._id%>" ><%= userJson[orderJson[sub_order[j]._id].user_id].name%>(<%= sub_order[j]._id%>)<br>
+                    <%}}%>
+            		<br>
+                    <label>订单运费:</label>
+                    <input type="text" required name="freight"/>
+                    <br>
+                    <label>订单状态:</label>
+                    <input type="radio" name="order_status" checked value="0" /> 收集中
+                    <input type="radio" name="order_status" value="1" /> 已下单
+                    <input type="radio" name="order_status" value="2" /> 已完成
+                    <br>
+            		<button type="submit">提交</button>
+            	</form>
+            </div>
+        </div>
+        <script type="text/javascript" src="/javascripts/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript">
+        	$('.product-menu-show').click(function(){
+        		$('.product-list').show();
+        		$('.product-add-wrap').hide();
+        	});
+        	$('.product-menu-add').click(function(){
+        		$('.product-list').hide();
+        		$('.product-add-wrap').show();
+        	});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>管理系统</title>
+        <link rel='stylesheet' href='/css/product.min.css' />
+    </head>
+    <body>
+        <% include header.ejs %>
+        <div class="product-content-wrap">
+            <div class="product-add-wrap">
+            	<form action="/product/update" method="post" enctype='multipart/form-data'>
+                    <input class="hide" name="id" value="<%=id%>"></input>
+            		<label>商品名称:</label>
+            		<input type="text" required value="<%= productData.name%>" name="name"/>
+            		<br>
+            		<label>商品图片：</label>
+            		<input type="file" name="images" multiple />
+            		<br>
+            		<label>商品描述</label>
+            		<textarea name="desc"><%= productData.desc%></textarea>
+            		<br>
+            		<label>商品进价：</label>
+            		<input type="text" required value="<%= productData.in_price%>" name="in_price" />
+            		<br>
+            		<label>商品卖价：</label>
+            		<input type="text" required value="<%= productData.sell_price%>" name="sell_price"/>
+            		<br>
+            		<label>商品重量：</label>
+            		<input type="text" required value="<%= productData.weight%>" name="weight"/>
+            		<br>
+            		<label>商品运费：</label>
+            		<input type="text" required value="<%= productData.freight%>" name="freight"/>
+            		<br>
+            		<label>商品库存：</label>
+            		<input type="text" required value="<%= productData.store%>" name="store"/>
+            		<br>
+            		<label>竞品价格：</label>
+            		<input type="text" required value="<%= productData.other_price%>" name="other_price"/>
+            		<br>
+            		<button type="submit">提交</button>
+            	</form>
+            </div>
+        </div>
+        <script type="text/javascript" src="/javascripts/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript">
+        	
+        </script>
+    </body>
+</html>
